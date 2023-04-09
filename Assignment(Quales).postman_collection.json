@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "6fd4efbf-1998-4691-a6c6-c360962c3099",
+		"name": "Assignment(Quales)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25923710"
+	},
+	"item": [
+		{
+			"name": "create course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"check the creation of a course\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"title contains\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Mubarak\");",
+							"});",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Mubarak\",\n    \"categoryId\": 3,\n    \"description\": \"software testing \",\n    \"courseUrl\": \"https://www.youtube.com/watch?v=8vXoMqWgbQQ\",\n    \"imageUrl\": \"https://source.unsplash.com/user/c_v_r/900x800\",\n    \"location\": \"online\",\n    \"isPremium\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/courses/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list of courses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"get the list of courses\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"contains a title\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Mubarak\");",
+							"});",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/courses",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET COURSE CREATED",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get the course i created\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"contains a title\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Mubarak\");",
+							"});",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"pm.environment.get(\"id\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/courses/{{id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update course created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"update the course created\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"updated list title name\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Mubarak software testing\");",
+							"});",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Mubarak software testing\",\n    \"categoryId\": 3,\n    \"description\": \"software testing \",\n    \"courseUrl\": \"https://www.youtube.com/watch?v=8vXoMqWgbQQ\",\n    \"imageUrl\": \"https://source.unsplash.com/user/c_v_r/900x800\",\n    \"location\": \"online\",\n    \"isPremium\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/courses/79",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"79"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete course created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"pm.test(\"successful deletion of course\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/courses/79",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"79"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
